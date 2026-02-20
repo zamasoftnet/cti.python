@@ -27,7 +27,7 @@ class Fragment:
         self.pref = None
         self.next = None
         self.length = 0
-        self.buffer = ''
+        self.buffer = b''
         self.segments = None
         self.id = id
 
@@ -41,6 +41,8 @@ class Fragment:
         
         戻り値: 書き込んだバイト数
         """
+        if isinstance(bytes, str):
+            bytes = bytes.encode('utf-8')
         l = len(bytes)
         if (self.segments == None and
         self.length + l <= FRG_MEM_SIZE and
@@ -51,7 +53,7 @@ class Fragment:
             if self.buffer:
                 segment, wlen = self._raf_write(tempFile, segment, self.buffer)
                 onMemory -= wlen
-                self.buffer = None
+                self.buffer = b''
             segment, l = self._raf_write(tempFile, segment, bytes)
         self.length += l
         return onMemory, segment, l
@@ -64,7 +66,7 @@ class Fragment:
         """
         if self.segments == None:
             out.write(self.buffer)
-            self.buffer = None
+            self.buffer = b''
         else:
             segcount = len(self.segments)
             for seg in self.segments:
@@ -81,6 +83,8 @@ class Fragment:
         
         戻り値: 書き込んだバイト数
         """
+        if isinstance(bytes, str):
+            bytes = bytes.encode('utf-8')
         if self.segments == None:
             self.segments = [segment]
             segment += 1
@@ -114,10 +118,10 @@ class StreamBuilder:
         
         例:
         def content_type(opts):
-            print "Content-Type: "+opts['mime_type']
+            print("Content-Type: "+opts['mime_type'])
         def content_length(length):
-            print "Content-Length: "+str(length)
-            print
+            print("Content-Length: "+str(length))
+            print()
         results = SingleResult(StreamBuilder(sys.stdout, content_length), content_type)
         """
         self.frgs = []
@@ -162,6 +166,8 @@ class StreamBuilder:
         pass
     
     def serial_write(self, data):
+        if isinstance(data, str):
+            data = data.encode('utf-8')
         self.out.write(data)
     
     def finish(self):
@@ -173,7 +179,7 @@ class StreamBuilder:
                 frg.flush(self.tempFile, self.out)
                 frg = frg.next
         finally:
-            self.tempFile.close
+            self.tempFile.close()
     
     def dispose(self):
         pass
@@ -192,13 +198,15 @@ class FileBuilder(StreamBuilder):
 
     def serial_write(self, data):
         if self.out == None:
-            self.out = open(self.file, 'w')
+            self.out = open(self.file, 'wb')
+        if isinstance(data, str):
+            data = data.encode('utf-8')
         self.out.write(data)
  
     def finish(self):
         if self.out == None:
-            self.out = open(self.file, 'w')
-            StreamBuilder.finish(self)
+            self.out = open(self.file, 'wb')
+        StreamBuilder.finish(self)
         self.out.close()
         self.out = None
         

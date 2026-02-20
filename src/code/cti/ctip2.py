@@ -12,7 +12,7 @@ def readfully(io, a):
     a: バイト数
     戻り値: 読み込んだ文字列
     """
-    ret = ''
+    ret = b''
     while a > 0:
         b = io.recv(a)
         a -= len(b)
@@ -50,6 +50,8 @@ def write_bytes(io, b):
     io: ソケット
     b: バイト列
     """
+    if isinstance(b, str):
+        b = b.encode('utf-8')
     io.sendall(pack('>H', len(b)))
     io.sendall(b)
 
@@ -110,8 +112,8 @@ def read_bytes(io):
     """
     b = readfully(io, 2)
     a = unpack('>H', b)
-    len = a[0]
-    b = readfully(io, len);
+    length = a[0]
+    b = readfully(io, length);
     return b;
 
 REQ_PROPERTY = 0x01
@@ -153,7 +155,7 @@ def cti_connect(io, encoding):
     io: ソケット
     encoding: 通信に用いるエンコーディング
     """
-    io.sendall("CTIP/2.0 "+encoding+"\n")
+    io.sendall(("CTIP/2.0 "+encoding+"\n").encode('utf-8'))
 
 def req_server_info(io, uri):
     """サーバー情報を要求します。
@@ -161,6 +163,8 @@ def req_server_info(io, uri):
     io: ソケット
     uri: URI
     """
+    if isinstance(uri, str):
+        uri = uri.encode('utf-8')
     payload = 1 + 2 + len(uri)
     write_int(io, payload)
     write_byte(io, REQ_SERVER_INFO)
@@ -194,6 +198,8 @@ def req_missing_resource(io, uri):
     io: ソケット
     uri: URI
     """
+    if isinstance(uri, str):
+        uri = uri.encode('utf-8')
     payload = 1 + 2 + len(uri)
     write_int(io, payload)
     write_byte(io, REQ_MISSING_RESOURCE)
@@ -244,6 +250,10 @@ def req_property(io, name, value):
     name: 名前
     value: 値
     """
+    if isinstance(name, str):
+        name = name.encode('utf-8')
+    if isinstance(value, str):
+        value = value.encode('utf-8')
     payload = len(name) + len(value) + 5
     write_int(io, payload)
     write_byte(io, REQ_PROPERTY)
@@ -256,6 +266,8 @@ def req_server_main(io, uri):
     io: ソケット
     uri: URI
     """
+    if isinstance(uri, str):
+        uri = uri.encode('utf-8')
     payload = len(uri) + 3
     write_int(io, payload)
     write_byte(io, REQ_SERVER_MAIN)
@@ -270,6 +282,12 @@ def req_resource(io, uri, mime_type = 'text/css', encoding = '', length = -1):
     encoding: エンコーディング
     length: 長さ
     """
+    if isinstance(uri, str):
+        uri = uri.encode('utf-8')
+    if isinstance(mime_type, str):
+        mime_type = mime_type.encode('utf-8')
+    if isinstance(encoding, str):
+        encoding = encoding.encode('utf-8')
     payload = len(uri) + len(mime_type) + len(encoding) + 7 + 8
     write_int(io, payload)
     write_byte(io, REQ_START_RESOURCE)
@@ -287,6 +305,12 @@ def req_start_main(io, uri, mime_type = 'text/html', encoding = '', length = -1)
     encoding: エンコーディング
     length: 長さ
     """
+    if isinstance(uri, str):
+        uri = uri.encode('utf-8')
+    if isinstance(mime_type, str):
+        mime_type = mime_type.encode('utf-8')
+    if isinstance(encoding, str):
+        encoding = encoding.encode('utf-8')
     payload = len(uri) + len(mime_type) + len(encoding) + 7 + 8
     write_int(io, payload)
     write_byte(io, REQ_START_MAIN)
@@ -301,6 +325,8 @@ def req_write(io, b):
     io: ソケット
     b: データ
     """
+    if isinstance(b, str):
+        b = b.encode('utf-8')
     payload = len(b) + 1
     write_int(io, payload)
     write_byte(io, REQ_DATA)
@@ -426,4 +452,4 @@ def res_next(io):
         }
     
     else:
-        raise IllegalStateError("Bad response type:#{type}")
+        raise Exception(f"Bad response type: {type}")

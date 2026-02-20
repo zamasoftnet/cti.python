@@ -1,39 +1,36 @@
-%define pythonlib1 %{_prefix}/lib/python2.5/dist-packages
-%define pythonlib2 %{_prefix}/lib/python2.6/dist-packages
-%define pythonlib3 %{_prefix}/lib/python2.7/dist-packages
+%define pythonlib4 %{_prefix}/lib/python3.10/dist-packages
+%define pythonlib5 %{_prefix}/lib/python3.11/dist-packages
+%define pythonlib6 %{_prefix}/lib/python3.12/dist-packages
 
-Name:			cti-python
-Version:		@version.number@
-Release:		0
-Epoch:			@build.number@
-Group:			Publishing
-Summary:		Copper PDF Python driver
-Source0:		cti-python-@aversion.number@.tar.gz
-Requires:		python >= 2.7.0
-BuildRoot:		%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Vendor:			Zamasoft
-License:		Commercial
-URL:			http://copper-pdf.com/
-Packager:		MIYABE Tatsuhiko
-ExclusiveOS:	linux
+Name:           cti-python
+Version:        @version.number@
+Release:        0
+Epoch:          @build.number@
+Summary:        Copper PDF Python driver
+Source0:        cti-python-@aversion.number@.tar.gz
+Requires:       python3 >= 3.10
+Vendor:         Zamasoft
+License:        Commercial
+URL:            https://copper-pdf.com/
+Packager:       MIYABE Tatsuhiko
+ExclusiveOS:    linux
 
 %description
 cti-python-@version.number@
 
 %prep
-rm -rf $RPM_BUILD_ROOT/*
-mkdir -p $RPM_BUILD_ROOT%{pythonlib1}
-mkdir -p $RPM_BUILD_ROOT%{pythonlib2}
-mkdir -p $RPM_BUILD_ROOT%{pythonlib3}
-
-%setup
+%setup -q
 
 %build
 
 %install
-cp -pr code/* $RPM_BUILD_ROOT%{pythonlib1}/
-cp -pr code/* $RPM_BUILD_ROOT%{pythonlib2}/
-cp -pr code/* $RPM_BUILD_ROOT%{pythonlib3}/
+rm -rf %{buildroot}
+mkdir -p %{buildroot}%{pythonlib4}
+mkdir -p %{buildroot}%{pythonlib5}
+mkdir -p %{buildroot}%{pythonlib6}
+cp -pr code/* %{buildroot}%{pythonlib4}/
+cp -pr code/* %{buildroot}%{pythonlib5}/
+cp -pr code/* %{buildroot}%{pythonlib6}/
 
 %pre
 
@@ -42,10 +39,9 @@ cp -pr code/* $RPM_BUILD_ROOT%{pythonlib3}/
 %preun
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
-%defattr(-, root, root, -)
-%{pythonlib1}
-%{pythonlib2}
-%{pythonlib3}
+%{pythonlib4}
+%{pythonlib5}
+%{pythonlib6}

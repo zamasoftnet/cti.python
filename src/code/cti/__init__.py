@@ -13,7 +13,7 @@ __status__ = "production"
 __version__ = "2.0.0"
 __date__ = "31 May 2012"
 
-from driver import Driver
+from .driver import Driver
 
 def get_driver(uri):
     """指定されたURIに接続するためのドライバを返します。

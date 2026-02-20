@@ -3,7 +3,8 @@
 $Id: results.py 932 2013-05-31 05:28:13Z miyabe $
 """
 
-from builder import *
+import os
+from .builder import *
 
 class SingleResult:
     """単一の結果を得るためのオブジェクトです。
@@ -23,7 +24,14 @@ class SingleResult:
         if self.builder == None:
             return NullBuilder()
         if self.finish_func is not None:
-            self.finish_func(opts)
+            # バイト文字列をデコードしたoptsを作成
+            decoded_opts = {}
+            for key, value in opts.items():
+                if isinstance(value, bytes):
+                    decoded_opts[key] = value.decode('utf-8')
+                else:
+                    decoded_opts[key] = value
+            self.finish_func(decoded_opts)
         builder = self.builder
         self.builder = None
         return builder
@@ -46,4 +54,6 @@ class DirectoryResults:
     
     def next_builder(self, opts = {}):
         self.counter += 1
-        return FileBuilder(self.dir+'/'+self.prefix+str(self.counter)+self.suffix)
+        filename = self.prefix + str(self.counter) + self.suffix
+        filepath = os.path.join(self.dir, filename)
+        return FileBuilder(filepath)

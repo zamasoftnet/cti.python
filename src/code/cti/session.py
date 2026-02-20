@@ -5,9 +5,9 @@ $Id: session.py 935 2013-05-31 06:46:26Z miyabe $
 
 import sys
 import select
-from ctip2 import *
-from builder import *
-from results import *
+from .ctip2 import *
+from .builder import *
+from .results import *
 
 class IllegalStateError(Exception):
     """関数の呼び出し順が不適切な場合に発生する例外です。
@@ -30,15 +30,15 @@ class Session:
         self.io = None
         self.reset();
         self.io = io
-        self.encoding = (options.has_key('encoding') and options['encoding']) or 'UTF-8'
-        self.user = (options.has_key('user') and options['user']) or ''
-        self.password = (options.has_key('password') and options['password']) or ''
+        self.encoding = (('encoding' in options) and options['encoding']) or 'UTF-8'
+        self.user = (('user' in options) and options['user']) or ''
+        self.password = (('password' in options) and options['password']) or ''
         
         cti_connect(self.io, self.encoding)
         data = "PLAIN: " + self.user + " " + self.password + "\n"
-        self.io.sendall(data)
+        self.io.sendall(data.encode('utf-8'))
         res = readfully(io, 4)
-        if res != "OK \n":
+        if res != b"OK \n":
             raise IllegalStateError("Authentication failure.")
 
     def __enter__(self):
@@ -56,13 +56,13 @@ class Session:
     返り値: サーバー情報のデータ文字列(XML)
         """
         req_server_info(self.io, uri)
-        data = ''
+        data = b''
         while 1:
             res = res_next(self.io)
             if res['type'] == RES_EOF:
                 break
             data += res['bytes']
-        return data
+        return data.decode('utf-8')
 
     def set_results(self, results):
         """変換結果の出力先を指定します。
@@ -121,7 +121,7 @@ class Session:
     
     例:
         def message_func(code, message, args):
-            print "%X %s" % (code, message)
+            print("{:X} {}".format(code, message))
         session.set_message_func(message_func)
         """
         if self.state >= 2:
@@ -138,7 +138,7 @@ class Session:
     
     例:
         def progress_func(length, read):
-            print "%d %d" % (length, read)
+            print("{} {}".format(length, read))
         session.set_progress_func(progress_func)
         """
         if self.state >= 2:
@@ -210,7 +210,7 @@ class Session:
         戻り値: リソースの出力先ストリームが返されます。
         
         例:
-            out = session.resource('test.css', {'mime_type' => 'test/css'})
+            out = session.resource('test.css', {'mime_type': 'test/css'})
             try:
                 file = open('data/test.css')
                 try:
@@ -222,9 +222,9 @@ class Session:
         """
         if self.state >= 2:
             raise IllegalStateError("resource: Main content is already sent.")
-        mime_type = (opts.has_key('mime_type') and opts['mime_type']) or 'text/css'
-        encoding = (opts.has_key('encoding') and opts['encoding']) or ''
-        length = (opts.has_key('length') and opts['length']) or -1
+        mime_type = (('mime_type' in opts) and opts['mime_type']) or 'text/css'
+        encoding = (('encoding' in opts) and opts['encoding']) or ''
+        length = (('length' in opts) and opts['length']) or -1
         req_resource(self.io, uri, mime_type, encoding, length)
         return ResourceOut(self.io)
 
@@ -237,7 +237,7 @@ class Session:
         戻り値: リソースの出力先ストリームが返されます。
         
         例:
-            out = session.transcode('.', {'mime_type' => 'text/html'})
+            out = session.transcode('.', {'mime_type': 'text/html'})
             try:
                 file = open('data/test.html')
                 try:
@@ -249,9 +249,9 @@ class Session:
         """
         if self.state >= 2:
             raise IllegalStateError("transcode: Main content is already sent.")
-        mime_type = (opts.has_key('mime_type') and opts['mime_type']) or 'text/css'
-        encoding = (opts.has_key('encoding') and opts['encoding']) or ''
-        length = (opts.has_key('length') and opts['length']) or -1
+        mime_type = (('mime_type' in opts) and opts['mime_type']) or 'text/css'
+        encoding = (('encoding' in opts) and opts['encoding']) or ''
+        length = (('length' in opts) and opts['length']) or -1
         self.state = 2
         req_start_main(self.io, uri, mime_type, encoding, length)
         return MainOut(self.io, self)
@@ -280,7 +280,7 @@ class Session:
     def reset(self):
         """全ての状態をリセットします。
         """
-        if self.state >= 3:
+        if (self.state or 0) >= 3:
             raise IllegalStateError("reset: The session is already closed.")
         if self.io:
             req_reset(self.io)
@@ -292,11 +292,11 @@ class Session:
         self.main_read = 0
         
         def content_type(opts):
-            print >> sys.__stdout__, "Content-Type: "+opts['mime_type']
+            print("Content-Type: "+opts['mime_type'], file=sys.__stdout__)
         def content_length(length):
-            print >> sys.__stdout__, "Content-Length: "+str(length)
-            print >> sys.__stdout__
-        self.results = SingleResult(StreamBuilder(sys.__stdout__, content_length), content_type)
+            print("Content-Length: "+str(length), file=sys.__stdout__)
+            print(file=sys.__stdout__)
+        self.results = SingleResult(StreamBuilder(sys.__stdout__.buffer, content_length), content_type)
         
         self.state = 1
 
@@ -340,7 +340,18 @@ class Session:
             self.builder.serial_write(res['bytes'])
         elif type == RES_MESSAGE:
             if self.message_func is not None:
-                self.message_func(res['code'], res['message'], res['args'])
+                message = res['message']
+                args = res['args']
+                # バイト文字列の場合はデコード
+                if isinstance(message, bytes):
+                    message = message.decode('utf-8')
+                decoded_args = []
+                for arg in args:
+                    if isinstance(arg, bytes):
+                        decoded_args.append(arg.decode('utf-8'))
+                    else:
+                        decoded_args.append(arg)
+                self.message_func(res['code'], message, decoded_args)
         elif type == RES_MAIN_LENGTH:
             self.main_length = res['length']
             if self.progress_func is not None:
@@ -351,6 +362,9 @@ class Session:
                 self.progress_func(self.main_length, self.main_read)        
         elif type == RES_RESOURCE_REQUEST:
             uri = res['uri']
+            # バイト文字列の場合はデコード
+            if isinstance(uri, bytes):
+                uri = uri.decode('utf-8')
             r = Resource(self.io, uri)
             if self.resolver_func is not None:
                 self.resolver_func(uri, r)
@@ -391,10 +405,12 @@ class ResourceOut:
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
     
-    def write(self, str):
-        while len(str) > 0:
-            data = str[0:CTI_BUFFER_SIZE]
-            str = str[CTI_BUFFER_SIZE:]
+    def write(self, s):
+        if isinstance(s, str):
+            s = s.encode('utf-8')
+        while len(s) > 0:
+            data = s[0:CTI_BUFFER_SIZE]
+            s = s[CTI_BUFFER_SIZE:]
             req_write(self.io, data)
     
     def close(self):
@@ -414,6 +430,8 @@ class MainOut:
         self.close()
     
     def write(self, s):
+        if isinstance(s, str):
+            s = s.encode('utf-8')
         while len(s) > 0:
             data = s[0:CTI_BUFFER_SIZE]
             s = s[CTI_BUFFER_SIZE:]
@@ -452,9 +470,9 @@ opts: リソースオプション(ハッシュ型で、'mime_type', 'encoding', 
 例:
 Session#resolver を参照してください。
         """
-        mime_type = (opts.has_key('mime_type') and opts['mime_type']) or 'text/css'
-        encoding = (opts.has_key('encoding') and opts['encoding']) or ''
-        length = (opts.has_key('length') and opts['length']) or -1
+        mime_type = (('mime_type' in opts) and opts['mime_type']) or 'text/css'
+        encoding = (('encoding' in opts) and opts['encoding']) or ''
+        length = (('length' in opts) and opts['length']) or -1
         req_resource(self.io, self.uri, mime_type, encoding, length)
         self.missing = False
         self.out = ResourceOut(self.io)
