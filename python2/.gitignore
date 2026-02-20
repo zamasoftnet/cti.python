@@ -1,0 +1,16 @@
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+build/
+dist/
+*.egg-info/
+.eggs/
+venv/
+.venv/
+*.pdf
+out/
+.idea/
+.vscode/
+*.swp
+test-config.json
