@@ -11,7 +11,37 @@ Copper PDF 文書変換サーバーに接続するためのPython 3ドライバ�
 
 ## インストール
 
-`src/code/cti/` ディレクトリをプロジェクトにコピーするか、`PYTHONPATH` に追加してください。
+推奨: Gitリポジトリを指定して `pip` でインストールしてください。
+
+```bash
+pip install "git+https://github.com/zamasoftnet/cti.python.git#subdirectory=python3"
+```
+
+SSH を使う場合:
+
+```bash
+pip install "git+ssh://git@github.com/zamasoftnet/cti.python.git#subdirectory=python3"
+```
+
+ブランチを指定する場合:
+
+```bash
+pip install "git+https://github.com/zamasoftnet/cti.python.git@<branch>#subdirectory=python3"
+```
+
+タグを指定する場合:
+
+```bash
+pip install "git+https://github.com/zamasoftnet/cti.python.git@<tag>#subdirectory=python3"
+```
+
+開発時にローカルチェックアウトを編集しながら使う場合:
+
+```bash
+pip install -e /path/to/cti.python/python3
+```
+
+互換手順（従来方式）: `src/code/cti/` ディレクトリをプロジェクトにコピーするか、`PYTHONPATH` に追加してください。
 
 ```
 export PYTHONPATH=/path/to/cti.python3/src/code:$PYTHONPATH

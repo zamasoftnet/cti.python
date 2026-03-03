@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cti-python"
+version = "3.0.0"
+description = "CTI driver for Python"
+readme = "README.md"
+requires-python = ">=3.0"
+authors = [
+  { name = "MIYABE Tatsuhiko" }
+]
+license = { text = "Apache-2.0" }
+
+[tool.setuptools]
+package-dir = { "" = "src/code" }
+
+[tool.setuptools.packages.find]
+where = ["src/code"]
