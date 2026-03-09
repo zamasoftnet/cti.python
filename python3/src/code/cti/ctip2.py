@@ -7,7 +7,7 @@ from struct import *
 
 def readfully(io, a):
     """データをバイト数だけ確実に読み込みます。
-    
+
     io: ソケット
     a: バイト数
     戻り値: 読み込んだ文字列
@@ -15,6 +15,8 @@ def readfully(io, a):
     ret = b''
     while a > 0:
         b = io.recv(a)
+        if not b:
+            raise IOError('Connection closed unexpectedly')
         a -= len(b)
         ret += b
     return ret

@@ -68,6 +68,9 @@ finally:
 このドライバは Python 2 向けのレガシー版です。ユニットテストは実施対象外で、配布時点で
 `ant dist` が通ることを確認する運用とします。
 
+PDF生成テスト（`generate-pdfs.py`）はPython 2版には追加しません。
+Python 3版（`../python3/`）を使用してください。
+
 ```bash
 ant dist
 ```
