@@ -23,6 +23,8 @@ jobs:
           cd python3/src/code
           python -m pydoc -w cti cti.builder cti.ctip2 cti.driver cti.results cti.session 2>/dev/null || true
           mv *.html ../../../build/apidoc/ 2>/dev/null || true
+          cd -
+          printf '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0; url=cti.html"><title>CTI Driver for Python - API Documentation</title></head><body><a href="cti.html">API Documentation</a></body></html>' > build/apidoc/index.html
 
       - name: Create dist
         run: |
