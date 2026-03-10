@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Create dist
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          DIRNAME="cti-python-${VERSION}"
+          STAGEDIR="build/${DIRNAME}"
+          mkdir -p "${STAGEDIR}/apidoc"
+          # Generate API docs
+          cd python3/src/code
+          python -m pydoc -w cti cti.builder cti.ctip2 cti.driver cti.results cti.session 2>/dev/null || true
+          mv *.html "../../../${STAGEDIR}/apidoc/" 2>/dev/null || true
+          cd -
+          # Copy source files
+          cp -r python3/src/. "${STAGEDIR}/"
+          rm -rf "${STAGEDIR}/test/out"
+          sed "s/@version@/${VERSION}/g" python3/README.md > "${STAGEDIR}/README.md"
+          # Create archives
+          cd build
+          zip -r "${DIRNAME}.zip" "${DIRNAME}"
+          tar czf "${DIRNAME}.tar.gz" "${DIRNAME}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/cti-python-*.zip
+            build/cti-python-*.tar.gz

@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 OUT_DIR = os.path.join(BASE_DIR, 'out')
 
-SERVER_URI = os.environ.get('CTI_SERVER_URI', 'ctip://localhost:8099/')
+SERVER_URI = os.environ.get('CTI_SERVER_URI', 'ctip://cti.li/')
 USER = os.environ.get('CTI_TEST_USER', os.environ.get('CTI_USER', 'user'))
 PASSWORD = os.environ.get('CTI_TEST_PASSWORD', os.environ.get('CTI_PASSWORD', 'kappa'))
 
@@ -163,6 +163,16 @@ def run_resolver():
     assert_pdf(output)
 
 
+def run_property():
+    output = os.path.join(OUT_DIR, 'python3-property.pdf')
+    if os.path.exists(output):
+        os.remove(output)
+    with get_session(SERVER_URI, session_option()) as session:
+        session.property('output.pdf.version', '1.5')
+        transcode_local_html(session, output)
+    assert_pdf(output)
+
+
 def run_reset():
     out1 = os.path.join(OUT_DIR, 'python3-reset-1.pdf')
     out2 = os.path.join(OUT_DIR, 'python3-reset-2.pdf')
@@ -188,6 +198,7 @@ if __name__ == '__main__':
     run_server_info()
     run_output_file()
     run_output_directory()
+    run_property()
     run_progress()
     run_resolver()
     run_reset()
