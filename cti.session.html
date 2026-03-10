@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module cti.session</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="cti.html" class="white">cti</a>.session</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:f%3A%5Cdev%5Czamasoftnet-public%5Ccti.python%5Cpython3%5Csrc%5Ccode%5Ccti%5Csession.py">f:\dev\zamasoftnet-public\cti.python\python3\src\code\cti\session.py</a></td></tr></table>
+    <p><span class="code">$Id:&nbsp;session.py&nbsp;935&nbsp;2013-05-31&nbsp;06:46:26Z&nbsp;miyabe&nbsp;$</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"><a href="select.html">select</a><br>
+</td><td class="multicolumn"><a href="sys.html">sys</a><br>
+</td><td class="multicolumn"><a href="tempfile.html">tempfile</a><br>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#Exception">builtins.Exception</a>(<a href="builtins.html#BaseException">builtins.BaseException</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="cti.session.html#IllegalStateError">IllegalStateError</a>
+</dt></dl>
+</dd>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="cti.session.html#MainOut">MainOut</a>
+</dt><dt class="heading-text"><a href="cti.session.html#Resource">Resource</a>
+</dt><dt class="heading-text"><a href="cti.session.html#ResourceOut">ResourceOut</a>
+</dt><dt class="heading-text"><a href="cti.session.html#Session">Session</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="IllegalStateError">class <strong>IllegalStateError</strong></a>(<a href="builtins.html#Exception">builtins.Exception</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#IllegalStateError">IllegalStateError</a>(message)<br>
+&nbsp;<br>
+関数の呼び出し順が不適切な場合に発生する例外です。<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="cti.session.html#IllegalStateError">IllegalStateError</a></dd>
+<dd><a href="builtins.html#Exception">builtins.Exception</a></dd>
+<dd><a href="builtins.html#BaseException">builtins.BaseException</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="IllegalStateError-__init__"><strong>__init__</strong></a>(self, message)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="IllegalStateError-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Static methods inherited from <a href="builtins.html#Exception">builtins.Exception</a>:<br>
+<dl><dt><a name="IllegalStateError-__new__"><strong>__new__</strong></a>(*args, **kwargs)<span class="grey"><span class="heading-text"> class method of <a href="builtins.html#Exception">builtins.Exception</a></span></span></dt><dd><span class="code">Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><a name="IllegalStateError-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><span class="code">Return&nbsp;getattr(self,&nbsp;name).</span></dd></dl>
+
+<dl><dt><a name="IllegalStateError-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="IllegalStateError-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<dl><dt><a name="IllegalStateError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="IllegalStateError-add_note"><strong>add_note</strong></a>(...)</dt><dd><span class="code"><a href="builtins.html#Exception">Exception</a>.<a href="#IllegalStateError-add_note">add_note</a>(note)&nbsp;--<br>
+add&nbsp;a&nbsp;note&nbsp;to&nbsp;the&nbsp;exception</span></dd></dl>
+
+<dl><dt><a name="IllegalStateError-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><span class="code"><a href="builtins.html#Exception">Exception</a>.<a href="#IllegalStateError-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
+set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><strong>__cause__</strong></dt>
+<dd><span class="code">exception&nbsp;cause</span></dd>
+</dl>
+<dl><dt><strong>__context__</strong></dt>
+<dd><span class="code">exception&nbsp;context</span></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>__suppress_context__</strong></dt>
+</dl>
+<dl><dt><strong>__traceback__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="MainOut">class <strong>MainOut</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#MainOut">MainOut</a>(io,&nbsp;session)<br>
+&nbsp;<br>
+<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="MainOut-__enter__"><strong>__enter__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MainOut-__exit__"><strong>__exit__</strong></a>(self, exc_type, exc_value, traceback)</dt></dl>
+
+<dl><dt><a name="MainOut-__init__"><strong>__init__</strong></a>(self, io, session)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="MainOut-close"><strong>close</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MainOut-write"><strong>write</strong></a>(self, s)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Resource">class <strong>Resource</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Resource">Resource</a>(io,&nbsp;uri)<br>
+&nbsp;<br>
+<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Resource-__init__"><strong>__init__</strong></a>(self, io, uri)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="Resource-finish"><strong>finish</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Resource-found"><strong>found</strong></a>(self, opts={})</dt><dd><span class="code">サーバーから要求されたリソースが見つかった場合の処理をします。<br>
+&nbsp;<br>
+opts:&nbsp;リソースオプション(ハッシュ型で、'mime_type',&nbsp;'encoding',&nbsp;'length'というキーでデータ型、文字コード、長さを設定することができます。)<br>
+&nbsp;<br>
+戻り値:&nbsp;出力先ストリームが返されます。<br>
+&nbsp;<br>
+例:<br>
+<a href="#Session">Session</a>#resolver&nbsp;を参照してください。</span></dd></dl>
+
+<dl><dt><a name="Resource-missing"><strong>missing</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="ResourceOut">class <strong>ResourceOut</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#ResourceOut">ResourceOut</a>(io)<br>
+&nbsp;<br>
+<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="ResourceOut-__enter__"><strong>__enter__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ResourceOut-__exit__"><strong>__exit__</strong></a>(self, exc_type, exc_value, traceback)</dt></dl>
+
+<dl><dt><a name="ResourceOut-__init__"><strong>__init__</strong></a>(self, io)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="ResourceOut-close"><strong>close</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ResourceOut-write"><strong>write</strong></a>(self, s)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Session">class <strong>Session</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Session">Session</a>(io,&nbsp;options={})<br>
+&nbsp;<br>
+<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Session-__enter__"><strong>__enter__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Session-__exit__"><strong>__exit__</strong></a>(self, exc_type, exc_value, traceback)</dt></dl>
+
+<dl><dt><a name="Session-__init__"><strong>__init__</strong></a>(self, io, options={})</dt><dd><span class="code">セッションのコンストラクタです。<br>
+セッションの作成は通常DriverManager.phpのcti_get_sessionで行うため、<br>
+ユーザーがコンストラクタを直接呼び出す必要はありません。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+options:&nbsp;接続オプション</span></dd></dl>
+
+<dl><dt><a name="Session-abort"><strong>abort</strong></a>(self, mode)</dt><dd><span class="code">変換処理の中断を要求します。<br>
+&nbsp;<br>
+mode:&nbsp;中断モード&nbsp;0=生成済みのデータを出力して中断,&nbsp;1=即時中断</span></dd></dl>
+
+<dl><dt><a name="Session-build_next"><strong>build_next</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Session-close"><strong>close</strong></a>(self)</dt><dd><span class="code">セッションを閉じます。</span></dd></dl>
+
+<dl><dt><a name="Session-get_server_info"><strong>get_server_info</strong></a>(self, uri)</dt><dd><span class="code">サーバー情報を返します。<br>
+詳細は{オンラインのドキュメント}[<a href="http://sourceforge.jp/projects/copper/wiki/CTIP2.0%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%83%85%E5%A0%B1]をご覧下さい">http://sourceforge.jp/projects/copper/wiki/CTIP2.0%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E6%83%85%E5%A0%B1]をご覧下さい</a>。<br>
+&nbsp;<br>
+uri:&nbsp;サーバー情報のURI<br>
+&nbsp;<br>
+返り値:&nbsp;サーバー情報のデータ文字列(XML)</span></dd></dl>
+
+<dl><dt><a name="Session-join"><strong>join</strong></a>(self)</dt><dd><span class="code">結果を結合します。<br>
+&nbsp;<br>
+先にSession#set_continuous&nbsp;を呼び出しておく必要があります。</span></dd></dl>
+
+<dl><dt><a name="Session-property"><strong>property</strong></a>(self, name, value)</dt><dd><span class="code">プロパティを設定します。<br>
+&nbsp;<br>
+セッションを作成した直後に呼び出してください。<br>
+利用可能なプロパティの一覧は{資料集}[<a href="http://dl.cssj.jp/docs/copper/3.0/html/5100_io-properties.html]を参照してください">http://dl.cssj.jp/docs/copper/3.0/html/5100_io-properties.html]を参照してください</a>。<br>
+&nbsp;<br>
+name:&nbsp;名前<br>
+value:&nbsp;値</span></dd></dl>
+
+<dl><dt><a name="Session-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">全ての状態をリセットします。</span></dd></dl>
+
+<dl><dt><a name="Session-resource"><strong>resource</strong></a>(self, uri, opts={})</dt><dd><span class="code">リソース送信処理を行います。<br>
+<a href="#Session">Session</a>#transcode&nbsp;および&nbsp;<a href="#Session">Session</a>#transcode_server&nbsp;の前に呼び出してください。<br>
+&nbsp;<br>
+uri:&nbsp;仮想URI<br>
+opts:&nbsp;リソースオプション(ハッシュ型で、'mime_type',&nbsp;'encoding',&nbsp;'length'というキーでデータ型、文字コード、長さを設定することができます。)<br>
+&nbsp;<br>
+戻り値:&nbsp;リソースの出力先ストリームが返されます。<br>
+&nbsp;<br>
+例:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;out&nbsp;=&nbsp;session.<a href="#Session-resource">resource</a>('test.css',&nbsp;{'mime_type':&nbsp;'test/css'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;=&nbsp;open('data/test.css')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.write(file.read())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.<a href="#Session-close">close</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.<a href="#Session-close">close</a>()</span></dd></dl>
+
+<dl><dt><a name="Session-set_continuous"><strong>set_continuous</strong></a>(self, continuous)</dt><dd><span class="code">複数の結果を結合するモードを切り替えます。<br>
+モードが有効な場合、&nbsp;<a href="#Session">Session</a>#join&nbsp;の呼び出しで複数の結果を結合して返します。<br>
+&nbsp;<br>
+<a href="#Session">Session</a>#transcode&nbsp;およびSession#transcode_server&nbsp;の前に呼び出してください。<br>
+&nbsp;<br>
+continuous:&nbsp;有効にするにはtrue</span></dd></dl>
+
+<dl><dt><a name="Session-set_message_func"><strong>set_message_func</strong></a>(self, message_func)</dt><dd><span class="code">エラーメッセージ受信のためのコールバック関数を設定します。<br>
+&nbsp;<br>
+<a href="#Session">Session</a>#transcode&nbsp;および&nbsp;<a href="#Session">Session</a>#transcode_server&nbsp;の前に呼び出してください。<br>
+コールバック関数の引数は、エラーコード(int)、メッセージ(str)、付属データ(配列)です。<br>
+&nbsp;<br>
+message_func:&nbsp;関数<br>
+&nbsp;<br>
+例:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;message_func(code,&nbsp;message,&nbsp;args):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("{:X}&nbsp;{}".format(code,&nbsp;message))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;session.<a href="#Session-set_message_func">set_message_func</a>(message_func)</span></dd></dl>
+
+<dl><dt><a name="Session-set_output_as_directory"><strong>set_output_as_directory</strong></a>(self, dir, prefix='', suffix='')</dt><dd><span class="code">変換結果の出力先ディレクトリ名を指定します。<br>
+&nbsp;<br>
+<a href="#Session">Session</a>#set_results&nbsp;の簡易版です。<br>
+こちらは、複数の結果をファイルとして出力するディレクトリ名を直接設定することができます。<br>
+ファイル名は&nbsp;prefix&nbsp;ページ番号&nbsp;suffix&nbsp;をつなげたものです。<br>
+&nbsp;<br>
+dir:&nbsp;出力先ディレクトリ名<br>
+prefix:&nbsp;出力するファイルの名前の前に付ける文字列<br>
+suffix:&nbsp;出力するファイルの名前の後に付ける文字列</span></dd></dl>
+
+<dl><dt><a name="Session-set_output_as_file"><strong>set_output_as_file</strong></a>(self, file)</dt><dd><span class="code">変換結果の出力先ファイル名を指定します。<br>
+&nbsp;<br>
+<a href="#Session">Session</a>#set_results　の簡易版です。<br>
+こちらは、１つだけ結果を出力するファイル名を直接設定することができます。<br>
+&nbsp;<br>
+file:&nbsp;出力先ファイル名</span></dd></dl>
+
+<dl><dt><a name="Session-set_output_as_stream"><strong>set_output_as_stream</strong></a>(self, out)</dt><dd><span class="code">変換結果の出力先リソースを指定します。<br>
+&nbsp;<br>
+<a href="#Session">Session</a>#set_results&nbsp;の簡易版です。<br>
+こちらは、１つだけの結果出力先を直接設定することができます。<br>
+&nbsp;<br>
+out:&nbsp;出力先&nbsp;IO&nbsp;オブジェクト</span></dd></dl>
+
+<dl><dt><a name="Session-set_progress_func"><strong>set_progress_func</strong></a>(self, progress_func)</dt><dd><span class="code">進行状況受信のためのコールバック関数を設定します。<br>
+&nbsp;<br>
+<a href="#Session">Session</a>#transcode&nbsp;および&nbsp;<a href="#Session">Session</a>#transcode_server&nbsp;の前に呼び出してください。<br>
+コールバック関数の引数は、全体のバイト数(int)、読み込み済みバイト数(int)です。<br>
+&nbsp;<br>
+progress_func:&nbsp;関数<br>
+&nbsp;<br>
+例:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;progress_func(length,&nbsp;read):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("{}&nbsp;{}".format(length,&nbsp;read))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;session.<a href="#Session-set_progress_func">set_progress_func</a>(progress_func)</span></dd></dl>
+
+<dl><dt><a name="Session-set_resolver_func"><strong>set_resolver_func</strong></a>(self, resolver_func)</dt><dd><span class="code">リソース解決のためのコールバック関数を設定します。<br>
+&nbsp;<br>
+<a href="#Session">Session</a>#transcode&nbsp;および&nbsp;<a href="#Session">Session</a>#transcode_server&nbsp;の前に呼び出してください。<br>
+コールバック関数の引数は、URI(str)、リソース出力クラス(&nbsp;<a href="#Resource">Resource</a>&nbsp;)です。<br>
+&nbsp;<br>
+resolver_func:&nbsp;関数<br>
+&nbsp;<br>
+URIに対応するリソースが見つかった場合、&nbsp;<a href="#Resource">Resource</a>#found&nbsp;メソッドを呼び出してください。<br>
+foundの呼び出しがない場合、リソースは見つからなかったものと扱われます。<br>
+&nbsp;<br>
+例:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;resolver(uri,&nbsp;r):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;os.path.exists(uri):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out&nbsp;=&nbsp;r.found()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;=&nbsp;open(uri)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.write(file.read())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.<a href="#Session-close">close</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.<a href="#Session-close">close</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;session.<a href="#Session-set_resolver_func">set_resolver_func</a>(resolver)</span></dd></dl>
+
+<dl><dt><a name="Session-set_results"><strong>set_results</strong></a>(self, results)</dt><dd><span class="code">変換結果の出力先を指定します。<br>
+&nbsp;<br>
+<a href="#Session">Session</a>#transcode&nbsp;および&nbsp;<a href="#Session">Session</a>#transcode_server&nbsp;の前に呼び出してください。<br>
+この関数を呼び出さないデフォルトの状態では、出力先は標準出力(&nbsp;sys.__stdout__&nbsp;)になります。<br>
+&nbsp;<br>
+また、デフォルトの状態では、自動的にContent-Type,&nbsp;Content-Lengthヘッダが送出されます。<br>
+&nbsp;<br>
+results:&nbsp;出力先のResults&nbsp;オブジェクト</span></dd></dl>
+
+<dl><dt><a name="Session-transcode"><strong>transcode</strong></a>(self, uri='.', opts={})</dt><dd><span class="code">変換対象の文書リソースを送信し、変換処理を行います。<br>
+&nbsp;<br>
+uri:&nbsp;仮想URI<br>
+opts:&nbsp;リソースオプション(ハッシュ型で、'mime_type',&nbsp;'encoding',&nbsp;'length'というキーでデータ型、文字コード、長さを設定することができます。)<br>
+&nbsp;<br>
+戻り値:&nbsp;リソースの出力先ストリームが返されます。<br>
+&nbsp;<br>
+例:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;out&nbsp;=&nbsp;session.<a href="#Session-transcode">transcode</a>('.',&nbsp;{'mime_type':&nbsp;'text/html'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;=&nbsp;open('data/test.html')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.write(file.read())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.<a href="#Session-close">close</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.<a href="#Session-close">close</a>()</span></dd></dl>
+
+<dl><dt><a name="Session-transcode_server"><strong>transcode_server</strong></a>(self, uri)</dt><dd><span class="code">サーバー側リソースを変換します。<br>
+&nbsp;<br>
+uri:&nbsp;URI</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-calcsize"><strong>calcsize</strong></a>(format, /)</dt><dd><span class="code">Return&nbsp;size&nbsp;in&nbsp;bytes&nbsp;of&nbsp;the&nbsp;struct&nbsp;described&nbsp;by&nbsp;the&nbsp;format&nbsp;string.</span></dd></dl>
+ <dl><dt><a name="-iter_unpack"><strong>iter_unpack</strong></a>(format, buffer, /)</dt><dd><span class="code">Return&nbsp;an&nbsp;iterator&nbsp;yielding&nbsp;tuples&nbsp;unpacked&nbsp;from&nbsp;the&nbsp;given&nbsp;bytes.<br>
+&nbsp;<br>
+The&nbsp;bytes&nbsp;are&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string,&nbsp;like<br>
+a&nbsp;repeated&nbsp;invocation&nbsp;of&nbsp;<a href="#-unpack_from">unpack_from</a>().<br>
+&nbsp;<br>
+Requires&nbsp;that&nbsp;the&nbsp;bytes&nbsp;length&nbsp;be&nbsp;a&nbsp;multiple&nbsp;of&nbsp;the&nbsp;format&nbsp;struct&nbsp;size.</span></dd></dl>
+ <dl><dt><a name="-pack"><strong>pack</strong></a>(...)</dt><dd><span class="code"><a href="#-pack">pack</a>(format,&nbsp;v1,&nbsp;v2,&nbsp;...)&nbsp;-&gt;&nbsp;bytes<br>
+&nbsp;<br>
+Return&nbsp;a&nbsp;bytes&nbsp;<a href="builtins.html#object">object</a>&nbsp;containing&nbsp;the&nbsp;values&nbsp;v1,&nbsp;v2,&nbsp;...&nbsp;packed&nbsp;according<br>
+to&nbsp;the&nbsp;format&nbsp;string.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
+ <dl><dt><a name="-pack_into"><strong>pack_into</strong></a>(...)</dt><dd><span class="code"><a href="#-pack_into">pack_into</a>(format,&nbsp;buffer,&nbsp;offset,&nbsp;v1,&nbsp;v2,&nbsp;...)<br>
+&nbsp;<br>
+Pack&nbsp;the&nbsp;values&nbsp;v1,&nbsp;v2,&nbsp;...&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string&nbsp;and&nbsp;write<br>
+the&nbsp;packed&nbsp;bytes&nbsp;into&nbsp;the&nbsp;writable&nbsp;buffer&nbsp;buf&nbsp;starting&nbsp;at&nbsp;offset.&nbsp;&nbsp;Note<br>
+that&nbsp;the&nbsp;offset&nbsp;is&nbsp;a&nbsp;required&nbsp;argument.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more<br>
+on&nbsp;format&nbsp;strings.</span></dd></dl>
+ <dl><dt><a name="-unpack"><strong>unpack</strong></a>(format, buffer, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;values&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;buffer's&nbsp;size&nbsp;in&nbsp;bytes&nbsp;must&nbsp;be&nbsp;<a href="#-calcsize">calcsize</a>(format).<br>
+&nbsp;<br>
+See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
+ <dl><dt><a name="-unpack_from"><strong>unpack_from</strong></a>(format, /, buffer, offset=0)</dt><dd><span class="code">Return&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;values&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;buffer's&nbsp;size,&nbsp;minus&nbsp;offset,&nbsp;must&nbsp;be&nbsp;at&nbsp;least&nbsp;<a href="#-calcsize">calcsize</a>(format).<br>
+&nbsp;<br>
+See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>CTI_BUFFER_SIZE</strong> = 1024<br>
+<strong>FRG_MEM_SIZE</strong> = 256<br>
+<strong>ON_MEMORY</strong> = 1048576<br>
+<strong>REQ_ABORT</strong> = 50<br>
+<strong>REQ_CLIENT_RESOURCE</strong> = 4<br>
+<strong>REQ_CLOSE</strong> = 66<br>
+<strong>REQ_CONTINUOUS</strong> = 5<br>
+<strong>REQ_DATA</strong> = 17<br>
+<strong>REQ_EOF</strong> = 49<br>
+<strong>REQ_JOIN</strong> = 51<br>
+<strong>REQ_MISSING_RESOURCE</strong> = 34<br>
+<strong>REQ_PROPERTY</strong> = 1<br>
+<strong>REQ_RESET</strong> = 65<br>
+<strong>REQ_SERVER_INFO</strong> = 81<br>
+<strong>REQ_SERVER_MAIN</strong> = 3<br>
+<strong>REQ_START_MAIN</strong> = 2<br>
+<strong>REQ_START_RESOURCE</strong> = 33<br>
+<strong>RES_ABORT</strong> = 50<br>
+<strong>RES_ADD_BLOCK</strong> = 18<br>
+<strong>RES_BLOCK_DATA</strong> = 17<br>
+<strong>RES_CLOSE_BLOCK</strong> = 24<br>
+<strong>RES_DATA</strong> = 23<br>
+<strong>RES_EOF</strong> = 49<br>
+<strong>RES_INSERT_BLOCK</strong> = 19<br>
+<strong>RES_MAIN_LENGTH</strong> = 21<br>
+<strong>RES_MAIN_READ</strong> = 22<br>
+<strong>RES_MESSAGE</strong> = 20<br>
+<strong>RES_NEXT</strong> = 51<br>
+<strong>RES_RESOURCE_REQUEST</strong> = 33<br>
+<strong>RES_START_DATA</strong> = 1<br>
+<strong>SEGMENT_SIZE</strong> = 8192</td></tr></table>
+</body></html>

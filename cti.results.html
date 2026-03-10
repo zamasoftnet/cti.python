@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module cti.results</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="cti.html" class="white">cti</a>.results</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:f%3A%5Cdev%5Czamasoftnet-public%5Ccti.python%5Cpython3%5Csrc%5Ccode%5Ccti%5Cresults.py">f:\dev\zamasoftnet-public\cti.python\python3\src\code\cti\results.py</a></td></tr></table>
+    <p><span class="code">$Id:&nbsp;results.py&nbsp;932&nbsp;2013-05-31&nbsp;05:28:13Z&nbsp;miyabe&nbsp;$</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"><a href="tempfile.html">tempfile</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="cti.results.html#DirectoryResults">DirectoryResults</a>
+</dt><dt class="heading-text"><a href="cti.results.html#SingleResult">SingleResult</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DirectoryResults">class <strong>DirectoryResults</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#DirectoryResults">DirectoryResults</a>(dir,&nbsp;prefix='',&nbsp;suffix='')<br>
+&nbsp;<br>
+ディレクトリに複数のファイルとして結果を得るためのオブジェクトです。<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="DirectoryResults-__init__"><strong>__init__</strong></a>(self, dir, prefix='', suffix='')</dt><dd><span class="code">結果オブジェクトを作成します。<br>
+&nbsp;<br>
+dir:&nbsp;出力先ディレクトリ<br>
+prefix:&nbsp;結果ファイル名の先頭に付ける文字列<br>
+suffix:&nbsp;結果ファイル名の末尾に付ける文字列</span></dd></dl>
+
+<dl><dt><a name="DirectoryResults-next_builder"><strong>next_builder</strong></a>(self, opts={})</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="SingleResult">class <strong>SingleResult</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#SingleResult">SingleResult</a>(builder,&nbsp;finish_func=None)<br>
+&nbsp;<br>
+単一の結果を得るためのオブジェクトです。<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="SingleResult-__init__"><strong>__init__</strong></a>(self, builder, finish_func=None)</dt><dd><span class="code">結果オブジェクトを作成します。<br>
+&nbsp;<br>
+builder:&nbsp;Builder&nbsp;オブジェクト<br>
+finish_func:&nbsp;結果が出力される直前に呼び出されるコールバック関数です。引数にハッシュ型として結果に関する情報が渡されます。<br>
+ハッシュには'uri',&nbsp;'mime_type',&nbsp;'encoding',&nbsp;'length'というキーでそれぞれURI,&nbsp;MIME型,&nbsp;文字コード,&nbsp;結果長さが格納されます。<br>
+ただし、'encoding',&nbsp;'length'は必ずしも提供されません。</span></dd></dl>
+
+<dl><dt><a name="SingleResult-next_builder"><strong>next_builder</strong></a>(self, opts={})</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>FRG_MEM_SIZE</strong> = 256<br>
+<strong>ON_MEMORY</strong> = 1048576<br>
+<strong>SEGMENT_SIZE</strong> = 8192</td></tr></table>
+</body></html>

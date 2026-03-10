@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module cti.builder</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="cti.html" class="white">cti</a>.builder</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:f%3A%5Cdev%5Czamasoftnet-public%5Ccti.python%5Cpython3%5Csrc%5Ccode%5Ccti%5Cbuilder.py">f:\dev\zamasoftnet-public\cti.python\python3\src\code\cti\builder.py</a></td></tr></table>
+    <p><span class="code">$Id:&nbsp;builder.py&nbsp;932&nbsp;2013-05-31&nbsp;05:28:13Z&nbsp;miyabe&nbsp;$</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="tempfile.html">tempfile</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="cti.builder.html#Fragment">Fragment</a>
+</dt><dt class="heading-text"><a href="cti.builder.html#NullBuilder">NullBuilder</a>
+</dt><dt class="heading-text"><a href="cti.builder.html#StreamBuilder">StreamBuilder</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="cti.builder.html#FileBuilder">FileBuilder</a>
+</dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="FileBuilder">class <strong>FileBuilder</strong></a>(<a href="cti.builder.html#StreamBuilder">StreamBuilder</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#FileBuilder">FileBuilder</a>(file)<br>
+&nbsp;<br>
+ファイルに対して結果を構築するオブジェクトです。<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="cti.builder.html#FileBuilder">FileBuilder</a></dd>
+<dd><a href="cti.builder.html#StreamBuilder">StreamBuilder</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FileBuilder-__init__"><strong>__init__</strong></a>(self, file)</dt><dd><span class="code">結果構築オブジェクトを作成します。<br>
+&nbsp;<br>
+file:&nbsp;結果ファイル</span></dd></dl>
+
+<dl><dt><a name="FileBuilder-finish"><strong>finish</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FileBuilder-serial_write"><strong>serial_write</strong></a>(self, data)</dt></dl>
+
+<hr>
+Methods inherited from <a href="cti.builder.html#StreamBuilder">StreamBuilder</a>:<br>
+<dl><dt><a name="FileBuilder-add_block"><strong>add_block</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FileBuilder-block_write"><strong>block_write</strong></a>(self, id, data)</dt></dl>
+
+<dl><dt><a name="FileBuilder-close_block"><strong>close_block</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="FileBuilder-dispose"><strong>dispose</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FileBuilder-insert_block_before"><strong>insert_block_before</strong></a>(self, anchor_id)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="cti.builder.html#StreamBuilder">StreamBuilder</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Fragment">class <strong>Fragment</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Fragment">Fragment</a>(id)<br>
+&nbsp;<br>
+<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Fragment-__init__"><strong>__init__</strong></a>(self, id)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="Fragment-flush"><strong>flush</strong></a>(self, tempFile, out)</dt><dd><span class="code">フラグメントの内容を吐き出して、フラグメントを破棄します。<br>
+&nbsp;<br>
+tempFile:&nbsp;一時ファイル<br>
+out:&nbsp;出力先ストリーム(&nbsp;IO&nbsp;)</span></dd></dl>
+
+<dl><dt><a name="Fragment-write"><strong>write</strong></a>(self, tempFile, onMemory, segment, bytes)</dt><dd><span class="code">フラグメントにデータを書き込みます。<br>
+&nbsp;<br>
+tempFile:&nbsp;一時ファイル<br>
+onMemory:&nbsp;メモリ上に置かれたデータの合計サイズ<br>
+segment:&nbsp;セグメント番号シーケンス<br>
+bytes:&nbsp;データ<br>
+&nbsp;<br>
+戻り値:&nbsp;書き込んだバイト数</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="NullBuilder">class <strong>NullBuilder</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">このオブジェクトは結果を構築しません。<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="NullBuilder-add_block"><strong>add_block</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NullBuilder-block_write"><strong>block_write</strong></a>(self, id, data)</dt></dl>
+
+<dl><dt><a name="NullBuilder-close_block"><strong>close_block</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="NullBuilder-dispose"><strong>dispose</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NullBuilder-finish"><strong>finish</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NullBuilder-insert_block_before"><strong>insert_block_before</strong></a>(self, anchor_id)</dt></dl>
+
+<dl><dt><a name="NullBuilder-serial_write"><strong>serial_write</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="StreamBuilder">class <strong>StreamBuilder</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#StreamBuilder">StreamBuilder</a>(out,&nbsp;finish_func=None)<br>
+&nbsp;<br>
+ストリームに対して結果を構築するオブジェクトです。<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="StreamBuilder-__init__"><strong>__init__</strong></a>(self, out, finish_func=None)</dt><dd><span class="code">結果構築オブジェクトを作成します。<br>
+&nbsp;<br>
+out:&nbsp;出力先ストリーム<br>
+finish_func:&nbsp;結果を実際に出力する前に呼び出されるコールバック関数。引数として結果のバイト数が渡されます<br>
+&nbsp;<br>
+例:<br>
+def&nbsp;content_type(opts):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print("Content-Type:&nbsp;"+opts['mime_type'])<br>
+def&nbsp;content_length(length):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print("Content-Length:&nbsp;"+str(length))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print()<br>
+results&nbsp;=&nbsp;SingleResult(<a href="#StreamBuilder">StreamBuilder</a>(sys.stdout,&nbsp;content_length),&nbsp;content_type)</span></dd></dl>
+
+<dl><dt><a name="StreamBuilder-add_block"><strong>add_block</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="StreamBuilder-block_write"><strong>block_write</strong></a>(self, id, data)</dt></dl>
+
+<dl><dt><a name="StreamBuilder-close_block"><strong>close_block</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="StreamBuilder-dispose"><strong>dispose</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="StreamBuilder-finish"><strong>finish</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="StreamBuilder-insert_block_before"><strong>insert_block_before</strong></a>(self, anchor_id)</dt></dl>
+
+<dl><dt><a name="StreamBuilder-serial_write"><strong>serial_write</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>FRG_MEM_SIZE</strong> = 256<br>
+<strong>ON_MEMORY</strong> = 1048576<br>
+<strong>SEGMENT_SIZE</strong> = 8192</td></tr></table>
+</body></html>

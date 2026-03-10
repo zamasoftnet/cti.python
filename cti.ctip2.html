@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module cti.ctip2</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="cti.html" class="white">cti</a>.ctip2</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:f%3A%5Cdev%5Czamasoftnet-public%5Ccti.python%5Cpython3%5Csrc%5Ccode%5Ccti%5Cctip2.py">f:\dev\zamasoftnet-public\cti.python\python3\src\code\cti\ctip2.py</a></td></tr></table>
+    <p><span class="code">$Id:&nbsp;ctip2.py&nbsp;926&nbsp;2013-05-30&nbsp;13:13:59Z&nbsp;miyabe&nbsp;$</span></p>
+<p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-calcsize"><strong>calcsize</strong></a>(format, /)</dt><dd><span class="code">Return&nbsp;size&nbsp;in&nbsp;bytes&nbsp;of&nbsp;the&nbsp;struct&nbsp;described&nbsp;by&nbsp;the&nbsp;format&nbsp;string.</span></dd></dl>
+ <dl><dt><a name="-cti_connect"><strong>cti_connect</strong></a>(io, encoding)</dt><dd><span class="code">セッションを開始します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+encoding:&nbsp;通信に用いるエンコーディング</span></dd></dl>
+ <dl><dt><a name="-iter_unpack"><strong>iter_unpack</strong></a>(format, buffer, /)</dt><dd><span class="code">Return&nbsp;an&nbsp;iterator&nbsp;yielding&nbsp;tuples&nbsp;unpacked&nbsp;from&nbsp;the&nbsp;given&nbsp;bytes.<br>
+&nbsp;<br>
+The&nbsp;bytes&nbsp;are&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string,&nbsp;like<br>
+a&nbsp;repeated&nbsp;invocation&nbsp;of&nbsp;<a href="#-unpack_from">unpack_from</a>().<br>
+&nbsp;<br>
+Requires&nbsp;that&nbsp;the&nbsp;bytes&nbsp;length&nbsp;be&nbsp;a&nbsp;multiple&nbsp;of&nbsp;the&nbsp;format&nbsp;struct&nbsp;size.</span></dd></dl>
+ <dl><dt><a name="-pack"><strong>pack</strong></a>(...)</dt><dd><span class="code"><a href="#-pack">pack</a>(format,&nbsp;v1,&nbsp;v2,&nbsp;...)&nbsp;-&gt;&nbsp;bytes<br>
+&nbsp;<br>
+Return&nbsp;a&nbsp;bytes&nbsp;object&nbsp;containing&nbsp;the&nbsp;values&nbsp;v1,&nbsp;v2,&nbsp;...&nbsp;packed&nbsp;according<br>
+to&nbsp;the&nbsp;format&nbsp;string.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
+ <dl><dt><a name="-pack_into"><strong>pack_into</strong></a>(...)</dt><dd><span class="code"><a href="#-pack_into">pack_into</a>(format,&nbsp;buffer,&nbsp;offset,&nbsp;v1,&nbsp;v2,&nbsp;...)<br>
+&nbsp;<br>
+Pack&nbsp;the&nbsp;values&nbsp;v1,&nbsp;v2,&nbsp;...&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string&nbsp;and&nbsp;write<br>
+the&nbsp;packed&nbsp;bytes&nbsp;into&nbsp;the&nbsp;writable&nbsp;buffer&nbsp;buf&nbsp;starting&nbsp;at&nbsp;offset.&nbsp;&nbsp;Note<br>
+that&nbsp;the&nbsp;offset&nbsp;is&nbsp;a&nbsp;required&nbsp;argument.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more<br>
+on&nbsp;format&nbsp;strings.</span></dd></dl>
+ <dl><dt><a name="-read_byte"><strong>read_byte</strong></a>(io)</dt><dd><span class="code">8ビット数値を読み込みます。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+戻り値:&nbsp;数値</span></dd></dl>
+ <dl><dt><a name="-read_bytes"><strong>read_bytes</strong></a>(io)</dt><dd><span class="code">16ビットビッグインディアン数値を読み込み、そのバイト数だけバイト列を読み込みます。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+戻り値:&nbsp;バイト列</span></dd></dl>
+ <dl><dt><a name="-read_int"><strong>read_int</strong></a>(io)</dt><dd><span class="code">32ビットビッグインディアン数値を読み込みます。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+戻り値:&nbsp;数値</span></dd></dl>
+ <dl><dt><a name="-read_long"><strong>read_long</strong></a>(io)</dt><dd><span class="code">64ビットビッグインディアン数値を読み込みます。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+戻り値:&nbsp;数値</span></dd></dl>
+ <dl><dt><a name="-read_short"><strong>read_short</strong></a>(io)</dt><dd><span class="code">16ビットビッグインディアン数値を読み込みます。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+戻り値:&nbsp;数値</span></dd></dl>
+ <dl><dt><a name="-readfully"><strong>readfully</strong></a>(io, a)</dt><dd><span class="code">データをバイト数だけ確実に読み込みます。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+a:&nbsp;バイト数<br>
+戻り値:&nbsp;読み込んだ文字列</span></dd></dl>
+ <dl><dt><a name="-req_abort"><strong>req_abort</strong></a>(io, mode)</dt><dd><span class="code">変換処理の中断を要求します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+mode:&nbsp;&nbsp;0=生成済みのデータを出力して中断,&nbsp;1=即時中断</span></dd></dl>
+ <dl><dt><a name="-req_client_resource"><strong>req_client_resource</strong></a>(io, mode)</dt><dd><span class="code">サーバーからクライアントのリソースを要求するモードを切り替えます。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+mode:&nbsp;0=off,&nbsp;1=on</span></dd></dl>
+ <dl><dt><a name="-req_close"><strong>req_close</strong></a>(io)</dt><dd><span class="code">通信を終了します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット</span></dd></dl>
+ <dl><dt><a name="-req_continuous"><strong>req_continuous</strong></a>(io, mode)</dt><dd><span class="code">複数の結果を結合するモードを切り替えます。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+mode:&nbsp;0=off,&nbsp;1=on</span></dd></dl>
+ <dl><dt><a name="-req_eof"><strong>req_eof</strong></a>(io)</dt><dd><span class="code">終了を通知します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット</span></dd></dl>
+ <dl><dt><a name="-req_join"><strong>req_join</strong></a>(io)</dt><dd><span class="code">変換結果を結合します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット</span></dd></dl>
+ <dl><dt><a name="-req_missing_resource"><strong>req_missing_resource</strong></a>(io, uri)</dt><dd><span class="code">リソースの不存在を通知します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+uri:&nbsp;URI</span></dd></dl>
+ <dl><dt><a name="-req_property"><strong>req_property</strong></a>(io, name, value)</dt><dd><span class="code">プロパティを送ります。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+name:&nbsp;名前<br>
+value:&nbsp;値</span></dd></dl>
+ <dl><dt><a name="-req_reset"><strong>req_reset</strong></a>(io)</dt><dd><span class="code">状態のリセットを要求します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット</span></dd></dl>
+ <dl><dt><a name="-req_resource"><strong>req_resource</strong></a>(io, uri, mime_type='text/css', encoding='', length=-1)</dt><dd><span class="code">リソースの開始を通知します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+uri:&nbsp;URI<br>
+mime_type:&nbsp;MIME型<br>
+encoding:&nbsp;エンコーディング<br>
+length:&nbsp;長さ</span></dd></dl>
+ <dl><dt><a name="-req_server_info"><strong>req_server_info</strong></a>(io, uri)</dt><dd><span class="code">サーバー情報を要求します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+uri:&nbsp;URI</span></dd></dl>
+ <dl><dt><a name="-req_server_main"><strong>req_server_main</strong></a>(io, uri)</dt><dd><span class="code">サーバー側データの変換を要求します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+uri:&nbsp;URI</span></dd></dl>
+ <dl><dt><a name="-req_start_main"><strong>req_start_main</strong></a>(io, uri, mime_type='text/html', encoding='', length=-1)</dt><dd><span class="code">本体の開始を通知します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+uri:&nbsp;URI<br>
+mime_type:&nbsp;MIME型<br>
+encoding:&nbsp;エンコーディング<br>
+length:&nbsp;長さ</span></dd></dl>
+ <dl><dt><a name="-req_write"><strong>req_write</strong></a>(io, b)</dt><dd><span class="code">データを送ります。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+b:&nbsp;データ</span></dd></dl>
+ <dl><dt><a name="-res_next"><strong>res_next</strong></a>(io)</dt><dd><span class="code">次のレスポンスを取得します。<br>
+&nbsp;<br>
+結果ハッシュには次のデータが含まれます。<br>
+&nbsp;<br>
+-&nbsp;'type'&nbsp;レスポンスタイプ<br>
+-&nbsp;'anchorId'&nbsp;挿入する場所の直後のフラグメントID<br>
+-&nbsp;'level'&nbsp;エラーレベル<br>
+-&nbsp;'error'&nbsp;エラーメッセージ<br>
+-&nbsp;'id'&nbsp;断片ID<br>
+-&nbsp;'progress'&nbsp;処理済バイト数<br>
+-&nbsp;'bytes'&nbsp;データのバイト列<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+戻り値:&nbsp;レスポンス</span></dd></dl>
+ <dl><dt><a name="-unpack"><strong>unpack</strong></a>(format, buffer, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;values&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;buffer's&nbsp;size&nbsp;in&nbsp;bytes&nbsp;must&nbsp;be&nbsp;<a href="#-calcsize">calcsize</a>(format).<br>
+&nbsp;<br>
+See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
+ <dl><dt><a name="-unpack_from"><strong>unpack_from</strong></a>(format, /, buffer, offset=0)</dt><dd><span class="code">Return&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;values&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;buffer's&nbsp;size,&nbsp;minus&nbsp;offset,&nbsp;must&nbsp;be&nbsp;at&nbsp;least&nbsp;<a href="#-calcsize">calcsize</a>(format).<br>
+&nbsp;<br>
+See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
+ <dl><dt><a name="-write_byte"><strong>write_byte</strong></a>(io, b)</dt><dd><span class="code">8ビット数値を書き出します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+b:&nbsp;数値</span></dd></dl>
+ <dl><dt><a name="-write_bytes"><strong>write_bytes</strong></a>(io, b)</dt><dd><span class="code">バイト数を16ビットビッグインディアンで書き出した後、バイト列を書き出します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+b:&nbsp;バイト列</span></dd></dl>
+ <dl><dt><a name="-write_int"><strong>write_int</strong></a>(io, a)</dt><dd><span class="code">32ビット数値をビッグインディアンで書き出します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+a:&nbsp;数値</span></dd></dl>
+ <dl><dt><a name="-write_long"><strong>write_long</strong></a>(io, a)</dt><dd><span class="code">64ビット数値をビッグインディアンで書き出します。<br>
+&nbsp;<br>
+io:&nbsp;ソケット<br>
+a:&nbsp;数値</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>CTI_BUFFER_SIZE</strong> = 1024<br>
+<strong>REQ_ABORT</strong> = 50<br>
+<strong>REQ_CLIENT_RESOURCE</strong> = 4<br>
+<strong>REQ_CLOSE</strong> = 66<br>
+<strong>REQ_CONTINUOUS</strong> = 5<br>
+<strong>REQ_DATA</strong> = 17<br>
+<strong>REQ_EOF</strong> = 49<br>
+<strong>REQ_JOIN</strong> = 51<br>
+<strong>REQ_MISSING_RESOURCE</strong> = 34<br>
+<strong>REQ_PROPERTY</strong> = 1<br>
+<strong>REQ_RESET</strong> = 65<br>
+<strong>REQ_SERVER_INFO</strong> = 81<br>
+<strong>REQ_SERVER_MAIN</strong> = 3<br>
+<strong>REQ_START_MAIN</strong> = 2<br>
+<strong>REQ_START_RESOURCE</strong> = 33<br>
+<strong>RES_ABORT</strong> = 50<br>
+<strong>RES_ADD_BLOCK</strong> = 18<br>
+<strong>RES_BLOCK_DATA</strong> = 17<br>
+<strong>RES_CLOSE_BLOCK</strong> = 24<br>
+<strong>RES_DATA</strong> = 23<br>
+<strong>RES_EOF</strong> = 49<br>
+<strong>RES_INSERT_BLOCK</strong> = 19<br>
+<strong>RES_MAIN_LENGTH</strong> = 21<br>
+<strong>RES_MAIN_READ</strong> = 22<br>
+<strong>RES_MESSAGE</strong> = 20<br>
+<strong>RES_NEXT</strong> = 51<br>
+<strong>RES_RESOURCE_REQUEST</strong> = 33<br>
+<strong>RES_START_DATA</strong> = 1</td></tr></table>
+</body></html>
