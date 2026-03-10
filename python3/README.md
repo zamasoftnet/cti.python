@@ -120,12 +120,15 @@ Sessionオブジェクトの主なメソッドは以下の通りです。
 python3 src/test/python3/*.py
 ```
 
+## API ドキュメント
+
+- **オンライン (pydoc)**: https://zamasoftnet.github.io/cti.python/
+
 ## ドキュメント生成方法
 
-ドキュメントを生成するには、`ant` の `doc` ターゲットを使用してください。内部的に `pydoc3` が使われます。
-
 ```bash
-ant doc
+cd python3/src/code
+python -m pydoc -w cti cti.builder cti.ctip2 cti.driver cti.results cti.session
 ```
 
 ## ライセンス

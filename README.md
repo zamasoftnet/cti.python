@@ -1,9 +1,10 @@
-# cti.python
+# CTI Driver for Python
 
-このリポジトリには、Python版CTIドライバーの世代別実装をまとめています。
+Copper PDF 文書変換サーバーに接続するためのPython 3ドライバです。
 
-- `python2/` : Python 2 系の実装
-- `python3/` : Python 3 系の実装
+## API ドキュメント
+
+- **オンライン (pydoc)**: https://zamasoftnet.github.io/cti.python/
 
 ## Python 3 のインストール（Git + pip）
 
