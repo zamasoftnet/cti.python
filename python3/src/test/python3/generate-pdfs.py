@@ -3,8 +3,7 @@
 """
 CTI Python3 ドライバ PDF生成テスト (TC-01〜TC-10)
 
-生成されたPDFは test-output/ ディレクトリに保存される。
-PdfBoxTest (Java) によって1ページ以上あることが検証される。
+生成されたPDFは build/test-output/ ディレクトリに保存される。
 """
 import os
 import sys
@@ -17,7 +16,7 @@ from cti import get_session
 
 SERVER_URI = 'ctip://cti.li/'
 SOURCE_URI = 'http://cti.li/'
-OUTPUT_DIR = os.path.normpath(os.path.join(BASE_DIR, '../../../../../test-output'))
+OUTPUT_DIR = os.path.normpath(os.path.join(BASE_DIR, '../../../../build/test-output'))
 
 
 def server_available():
