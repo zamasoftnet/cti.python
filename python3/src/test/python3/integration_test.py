@@ -18,6 +18,12 @@ OUT_DIR = os.path.join(BASE_DIR, 'out')
 SERVER_URI = os.environ.get('CTI_SERVER_URI', 'ctip://cti.li/')
 USER = os.environ.get('CTI_TEST_USER', os.environ.get('CTI_USER', 'user'))
 PASSWORD = os.environ.get('CTI_TEST_PASSWORD', os.environ.get('CTI_PASSWORD', 'kappa'))
+# 接続試験マトリクスの共通契約(copperpdf4/docs/design/2026-09-20-cti-driver-tls-test-matrix-design.md §2)。
+# Python 版には証明書の検証を省く指定が無いので CTI_TLS_INSECURE は受け付けない(設定エラー)。
+# CTI_EXPECT_REJECT=1 で「証明書の検証で拒否されること」だけを試験する
+EXPECT_REJECT = os.environ.get('CTI_EXPECT_REJECT') == '1'
+if os.environ.get('CTI_TLS_INSECURE') == '1':
+    sys.exit('CTI_TLS_INSECURE は Python 版では使えません(証明書を検証しない指定がありません)')
 
 
 def data_path(name):
@@ -188,18 +194,40 @@ def run_reset():
     assert_pdf(out2)
 
 
-if __name__ == '__main__':
-    if not server_available():
-        print('CTI サーバーに接続できないため、テストをスキップします。')
-        sys.exit(0)
+def run_certificate_rejection():
+    """拒否試験(tls-reject / tls-badname)。接続を起こし、証明書の検証エラーで拒否されることだけを
+    確かめる。変換まで進む・接続拒否・認証失敗は成功に数えない。"""
+    import ssl
+    try:
+        session = get_session(SERVER_URI, session_option())
+    except ssl.SSLCertVerificationError as e:
+        print('CTI-MATRIX reject: %s' % e)
+        return
+    except ssl.SSLError as e:
+        raise AssertionError('証明書の検証以外の TLS エラー: %s' % e)
+    session.close()
+    raise AssertionError('証明書の検証で拒否されなかった(接続できてしまった)')
 
+
+if __name__ == '__main__':
+    # 到達不能は失敗(黙って exit 0 にしない。2026-09-20、マトリクスの契約)
+    if not server_available():
+        sys.exit('CTI サーバー (%s) に接続できません。' % SERVER_URI)
+
+    tests = [run_certificate_rejection] if EXPECT_REJECT else [
+        run_auth_failure, run_server_info, run_output_file, run_output_directory,
+        run_property, run_progress, run_resolver, run_reset]
     os.makedirs(OUT_DIR, exist_ok=True)
-    run_auth_failure()
-    run_server_info()
-    run_output_file()
-    run_output_directory()
-    run_property()
-    run_progress()
-    run_resolver()
-    run_reset()
+    passed = 0
+    failed = []
+    for test in tests:
+        try:
+            test()
+            passed += 1
+        except Exception as e:  # 1 件の失敗で後続を止めない(実行範囲をモード間で揃える)
+            failed.append('%s: %s' % (test.__name__, e))
+            print('FAIL %s: %s' % (test.__name__, e))
+    print('CTI-MATRIX ran=%d passed=%d failed=%d skipped=0' % (len(tests), passed, len(failed)))
+    if failed:
+        sys.exit('Python3 統合テスト: %d 件失敗' % len(failed))
     print('Python3 統合テスト: すべて成功しました。')
