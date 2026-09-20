@@ -158,6 +158,8 @@ Apache License 2.0 の下で公開されています。詳細は LICENSE ファ�
 - 試験用に証明書の検証を省くオプション `'insecure': True` を追加(他言語版の Java `--insecure`、
   .NET `?insecure=1`、Ruby/Perl の `insecure` に相当)。
 - `cti.__version__` を実際の版に合わせました。
+- `Session.abort()` が `transcode()` の後に呼べなかった(「already closed」で拒まれる)欠陥を直しました。
+  本文の送信中に呼ぶのが用途なので、閉じた後だけ拒みます。
 
 ### v3.0.1 (2026/3/9)
 

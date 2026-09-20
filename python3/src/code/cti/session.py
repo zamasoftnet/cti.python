@@ -273,7 +273,9 @@ class Session:
     
     mode: 中断モード 0=生成済みのデータを出力して中断, 1=即時中断
         """
-        if self.state >= 2:
+        # 本文を送っている最中(state 2)に別スレッドから呼ぶのが用途なので、閉じた後(3)だけ拒む。
+        # 従来は >= 2 で拒んでいたため、transcode() の後は一度も呼べなかった(2026-09-20 に試験で発見)
+        if self.state >= 3:
             raise IllegalStateError("abort: The session is already closed.")
         req_abort(self.io, mode)
 

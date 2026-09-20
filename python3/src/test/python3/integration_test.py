@@ -194,6 +194,99 @@ def run_reset():
     assert_pdf(out2)
 
 
+# ---- プロトコルの周辺機能(2026-09-20、接続試験マトリクスの拡張)。
+# 主要機能の 8 項目に、メッセージ受信・中断・ストリーム出力・連続結合を足す。7 本のドライバで同じ 4 項目。
+
+MISSING_CSS_HTML = b'<html><head><link rel="stylesheet" href="missing.css"></head><body><p>message test</p></body></html>'
+
+
+def big_html(paragraphs):
+    return b'<html><body>' + b''.join(b'<p>paragraph %d %s</p>' % (i, b'x' * 300) for i in range(paragraphs)) + b'</body></html>'
+
+
+def run_message_callback():
+    """存在しないスタイルシートを参照する文書を変換し、サーバーのエラーメッセージが
+    コールバックに届く(引数にその名前が入る)ことを確かめる。"""
+    import io
+    messages = []
+    with get_session(SERVER_URI, session_option()) as session:
+        session.set_message_func(lambda code, message, args: messages.append((code, message, list(args))))
+        buf = io.BytesIO()
+        session.set_output_as_stream(buf)
+        out = session.transcode('.', {'mime_type': 'text/html'})
+        out.write(MISSING_CSS_HTML)
+        out.close()
+    assert buf.getvalue()[:4] == b'%PDF'
+    hits = [m for m in messages if 'missing.css' in m[2] or 'missing.css' in m[1]]
+    assert hits, 'missing.css についてのメッセージが届いていない: %r' % (messages,)
+    assert all(isinstance(m[0], int) and m[0] > 0 for m in hits)
+
+
+def run_abort():
+    """本文の送信中に abort を送ると変換が止まり(完全な出力が返らない)、reset 後に同じセッションで
+    再変換できることを確かめる。サーバーが中断をどのメッセージで報告するかは版で違うので見ない。"""
+    import io
+    html = big_html(3000)
+    with get_session(SERVER_URI, session_option()) as session:
+        full = io.BytesIO()
+        session.set_output_as_stream(full)
+        out = session.transcode('.', {'mime_type': 'text/html'})
+        out.write(html)
+        out.close()
+        assert full.getvalue()[:4] == b'%PDF'
+        session.reset()
+
+        aborted = io.BytesIO()
+        session.set_output_as_stream(aborted)
+        out = session.transcode('.', {'mime_type': 'text/html'})
+        out.write(html[:len(html) // 2])
+        session.abort(1)
+        out.write(html[len(html) // 2:])
+        out.close()
+        assert len(aborted.getvalue()) < len(full.getvalue()), '中断したのに完全な出力が返った'
+        session.reset()
+
+        again = io.BytesIO()
+        session.set_output_as_stream(again)
+        out = session.transcode('.', {'mime_type': 'text/html'})
+        out.write(b'<p>after abort</p>')
+        out.close()
+        assert again.getvalue()[:4] == b'%PDF', '中断後のセッションで再変換できない'
+
+
+def run_output_stream():
+    """set_output_as_stream で結果がストリームに書かれる。"""
+    import io
+    buf = io.BytesIO()
+    with get_session(SERVER_URI, session_option()) as session:
+        session.set_output_as_stream(buf)
+        transcode_local_html(session, None)
+    assert buf.getvalue()[:4] == b'%PDF'
+    assert len(buf.getvalue()) > 100
+
+
+def run_continuous_join():
+    """連続モードで 2 文書を変換して join すると 1 つの PDF になる(1 文書より大きい)。"""
+    import io
+    single = io.BytesIO()
+    with get_session(SERVER_URI, session_option()) as session:
+        session.set_output_as_stream(single)
+        out = session.transcode('.', {'mime_type': 'text/html'})
+        out.write(b'<p>doc 0</p>')
+        out.close()
+    joined = io.BytesIO()
+    with get_session(SERVER_URI, session_option()) as session:
+        session.set_output_as_stream(joined)
+        session.set_continuous(True)
+        for i in range(2):
+            out = session.transcode('.', {'mime_type': 'text/html'})
+            out.write(b'<p>doc %d</p>' % i)
+            out.close()
+        session.join()
+    assert joined.getvalue()[:4] == b'%PDF'
+    assert len(joined.getvalue()) > len(single.getvalue()), '結合した出力が 1 文書より大きくない'
+
+
 def run_certificate_rejection():
     """拒否試験(tls-reject / tls-badname)。接続を起こし、証明書の検証エラーで拒否されることだけを
     確かめる。変換まで進む・接続拒否・認証失敗は成功に数えない。"""
@@ -216,7 +309,8 @@ if __name__ == '__main__':
 
     tests = [run_certificate_rejection] if EXPECT_REJECT else [
         run_auth_failure, run_server_info, run_output_file, run_output_directory,
-        run_property, run_progress, run_resolver, run_reset]
+        run_property, run_progress, run_resolver, run_reset,
+        run_message_callback, run_abort, run_output_stream, run_continuous_join]
     os.makedirs(OUT_DIR, exist_ok=True)
     passed = 0
     failed = []
