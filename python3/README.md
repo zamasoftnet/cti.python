@@ -88,6 +88,20 @@ with get_session('ctip://localhost:8099/', {'user': 'user', 'password': 'kappa'}
             out.write(f.read())
 ```
 
+## TLS 接続
+
+`ctips://` で接続すると、サーバー証明書を Python の既定の認証局ストア(`ssl.create_default_context()`)で
+検証し、ホスト名も照合します。自己署名や独自の認証局の証明書は `SSL_CERT_FILE` 環境変数で認証局を追加してください。
+
+試験用に検証を省くには、オプションに `'insecure': True` を渡します(3.0.2 以降。証明書もホスト名も
+確かめないので、本番では使わないでください)。
+
+```python
+session = get_session('ctips://localhost:8094/', {
+    'user': 'user', 'password': 'kappa', 'insecure': True
+})
+```
+
 ## API概要
 
 Sessionオブジェクトの主なメソッドは以下の通りです。
@@ -138,6 +152,12 @@ Copyright (c) 2013-2025 Zamasoft
 Apache License 2.0 の下で公開されています。詳細は LICENSE ファイルを参照してください。
 
 ## 変更履歴
+
+### v3.0.2 (2026/9/20)
+
+- 試験用に証明書の検証を省くオプション `'insecure': True` を追加(他言語版の Java `--insecure`、
+  .NET `?insecure=1`、Ruby/Perl の `insecure` に相当)。
+- `cti.__version__` を実際の版に合わせました。
 
 ### v3.0.1 (2026/3/9)
 

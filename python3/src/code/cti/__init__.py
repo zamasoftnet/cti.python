@@ -10,7 +10,7 @@ http://dl.cssj.jp/docs/copper/3.0/html/3425_ctip2_python.html
 
 __author__ = "MIYABE Tatsuhiko <tatsuhiko@miya.be>"
 __status__ = "production"
-__version__ = "2.0.0"
+__version__ = "3.0.2"
 __date__ = "31 May 2012"
 
 from .driver import Driver

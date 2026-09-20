@@ -15,7 +15,7 @@ class Driver:
         """指定されたURIに接続し、セッションを返します。
         
         uri: 接続先アドレス
-        options: 接続オプション
+        options: 接続オプション('user'、'password'、試験用の 'insecure'=True で証明書を検証しない)
         
             返り値: Session オブジェクト
         """
@@ -48,9 +48,10 @@ class Driver:
             # SSLを使う場合
             import ssl
             context = ssl.create_default_context()
-            # 自己署名証明書を許可する場合（開発環境用）
-            # context.check_hostname = False
-            # context.verify_mode = ssl.CERT_NONE
+            if options and options.get('insecure'):
+                # 試験用: 証明書の検証とホスト名の照合を省く(3.0.2 以降)
+                context.check_hostname = False
+                context.verify_mode = ssl.CERT_NONE
             s = context.wrap_socket(s, server_hostname=host)
         s.connect((host, port))
         return Session(s, options)

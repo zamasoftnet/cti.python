@@ -4,7 +4,8 @@ import os
 import re
 import socket
 import sys
-sys.path.append('../../code/')
+# pip で入れた古い cti より手元の実装を先に(append だと site-packages が勝つ)
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'code'))
 
 from cti import get_session
 from cti.builder import *
@@ -19,11 +20,10 @@ SERVER_URI = os.environ.get('CTI_SERVER_URI', 'ctip://cti.li/')
 USER = os.environ.get('CTI_TEST_USER', os.environ.get('CTI_USER', 'user'))
 PASSWORD = os.environ.get('CTI_TEST_PASSWORD', os.environ.get('CTI_PASSWORD', 'kappa'))
 # 接続試験マトリクスの共通契約(copperpdf4/docs/design/2026-09-20-cti-driver-tls-test-matrix-design.md §2)。
-# Python 版には証明書の検証を省く指定が無いので CTI_TLS_INSECURE は受け付けない(設定エラー)。
+# CTI_TLS_INSECURE=1 で証明書の検証を省く('insecure' オプション、3.0.2 以降)。
 # CTI_EXPECT_REJECT=1 で「証明書の検証で拒否されること」だけを試験する
 EXPECT_REJECT = os.environ.get('CTI_EXPECT_REJECT') == '1'
-if os.environ.get('CTI_TLS_INSECURE') == '1':
-    sys.exit('CTI_TLS_INSECURE は Python 版では使えません(証明書を検証しない指定がありません)')
+INSECURE = os.environ.get('CTI_TLS_INSECURE') == '1'
 
 
 def data_path(name):
@@ -31,10 +31,13 @@ def data_path(name):
 
 
 def session_option():
-    return {
+    opts = {
         'user': USER,
         'password': PASSWORD
     }
+    if INSECURE:
+        opts['insecure'] = True
+    return opts
 
 
 def parse_host_port():
@@ -88,10 +91,7 @@ def transcode_local_html(session, output_file, with_css=True):
 
 def run_auth_failure():
     try:
-        get_session(SERVER_URI, {
-            'user': 'invalid-user',
-            'password': 'invalid-password'
-        })
+        get_session(SERVER_URI, dict(session_option(), user='invalid-user', password='invalid-password'))
         raise AssertionError('認証失敗時に例外が発生していません')
     except IllegalStateError:
         pass
