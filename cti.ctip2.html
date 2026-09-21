@@ -8,7 +8,7 @@
 <table class="heading">
 <tr class="heading-text decor">
 <td class="title">&nbsp;<br><strong class="title"><a href="cti.html" class="white">cti</a>.ctip2</strong></td>
-<td class="extra"><a href=".">index</a><br><a href="file:f%3A%5Cdev%5Czamasoftnet-public%5Ccti.python%5Cpython3%5Csrc%5Ccode%5Ccti%5Cctip2.py">f:\dev\zamasoftnet-public\cti.python\python3\src\code\cti\ctip2.py</a></td></tr></table>
+<td class="extra"><a href=".">index</a><br><a href="file:/home/runner/work/cti.python/cti.python/python3/src/code/cti/ctip2.py">/home/runner/work/cti.python/cti.python/python3/src/code/cti/ctip2.py</a></td></tr></table>
     <p><span class="code">$Id:&nbsp;ctip2.py&nbsp;926&nbsp;2013-05-30&nbsp;13:13:59Z&nbsp;miyabe&nbsp;$</span></p>
 <p>
 <table class="section">
@@ -35,8 +35,8 @@ to&nbsp;the&nbsp;format&nbsp;string.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&n
 &nbsp;<br>
 Pack&nbsp;the&nbsp;values&nbsp;v1,&nbsp;v2,&nbsp;...&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string&nbsp;and&nbsp;write<br>
 the&nbsp;packed&nbsp;bytes&nbsp;into&nbsp;the&nbsp;writable&nbsp;buffer&nbsp;buf&nbsp;starting&nbsp;at&nbsp;offset.&nbsp;&nbsp;Note<br>
-that&nbsp;the&nbsp;offset&nbsp;is&nbsp;a&nbsp;required&nbsp;argument.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more<br>
-on&nbsp;format&nbsp;strings.</span></dd></dl>
+that&nbsp;the&nbsp;offset&nbsp;is&nbsp;a&nbsp;required&nbsp;argument.&nbsp;&nbsp;A&nbsp;negative&nbsp;offset&nbsp;counts&nbsp;from<br>
+the&nbsp;end&nbsp;of&nbsp;the&nbsp;buffer.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
  <dl><dt><a name="-read_byte"><strong>read_byte</strong></a>(io)</dt><dd><span class="code">8ビット数値を読み込みます。<br>
 &nbsp;<br>
 io:&nbsp;ソケット<br>
@@ -143,6 +143,7 @@ See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span
  <dl><dt><a name="-unpack_from"><strong>unpack_from</strong></a>(format, /, buffer, offset=0)</dt><dd><span class="code">Return&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;values&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string.<br>
 &nbsp;<br>
 The&nbsp;buffer's&nbsp;size,&nbsp;minus&nbsp;offset,&nbsp;must&nbsp;be&nbsp;at&nbsp;least&nbsp;<a href="#-calcsize">calcsize</a>(format).<br>
+A&nbsp;negative&nbsp;offset&nbsp;counts&nbsp;from&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;buffer.<br>
 &nbsp;<br>
 See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
  <dl><dt><a name="-write_byte"><strong>write_byte</strong></a>(io, b)</dt><dd><span class="code">8ビット数値を書き出します。<br>

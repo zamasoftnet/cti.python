@@ -8,7 +8,7 @@
 <table class="heading">
 <tr class="heading-text decor">
 <td class="title">&nbsp;<br><strong class="title"><a href="cti.html" class="white">cti</a>.session</strong></td>
-<td class="extra"><a href=".">index</a><br><a href="file:f%3A%5Cdev%5Czamasoftnet-public%5Ccti.python%5Cpython3%5Csrc%5Ccode%5Ccti%5Csession.py">f:\dev\zamasoftnet-public\cti.python\python3\src\code\cti\session.py</a></td></tr></table>
+<td class="extra"><a href=".">index</a><br><a href="file:/home/runner/work/cti.python/cti.python/python3/src/code/cti/session.py">/home/runner/work/cti.python/cti.python/python3/src/code/cti/session.py</a></td></tr></table>
     <p><span class="code">$Id:&nbsp;session.py&nbsp;935&nbsp;2013-05-31&nbsp;06:46:26Z&nbsp;miyabe&nbsp;$</span></p>
 <p>
 <table class="section">
@@ -76,27 +76,21 @@ Static methods inherited from <a href="builtins.html#Exception">builtins.Excepti
 
 <hr>
 Methods inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
-<dl><dt><a name="IllegalStateError-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><span class="code">Return&nbsp;getattr(self,&nbsp;name).</span></dd></dl>
-
-<dl><dt><a name="IllegalStateError-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+<dl><dt><a name="IllegalStateError-__reduce__"><strong>__reduce__</strong></a>(self, /)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
 
 <dl><dt><a name="IllegalStateError-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
 
-<dl><dt><a name="IllegalStateError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+<dl><dt><a name="IllegalStateError-__setstate__"><strong>__setstate__</strong></a>(self, state, /)</dt></dl>
 
-<dl><dt><a name="IllegalStateError-add_note"><strong>add_note</strong></a>(...)</dt><dd><span class="code"><a href="builtins.html#Exception">Exception</a>.<a href="#IllegalStateError-add_note">add_note</a>(note)&nbsp;--<br>
-add&nbsp;a&nbsp;note&nbsp;to&nbsp;the&nbsp;exception</span></dd></dl>
+<dl><dt><a name="IllegalStateError-add_note"><strong>add_note</strong></a>(self, note, /)</dt><dd><span class="code">Add&nbsp;a&nbsp;note&nbsp;to&nbsp;the&nbsp;exception</span></dd></dl>
 
-<dl><dt><a name="IllegalStateError-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><span class="code"><a href="builtins.html#Exception">Exception</a>.<a href="#IllegalStateError-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
-set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</span></dd></dl>
+<dl><dt><a name="IllegalStateError-with_traceback"><strong>with_traceback</strong></a>(self, tb, /)</dt><dd><span class="code">Set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</span></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
 <dl><dt><strong>__cause__</strong></dt>
-<dd><span class="code">exception&nbsp;cause</span></dd>
 </dl>
 <dl><dt><strong>__context__</strong></dt>
-<dd><span class="code">exception&nbsp;context</span></dd>
 </dl>
 <dl><dt><strong>__dict__</strong></dt>
 </dl>
@@ -407,8 +401,8 @@ to&nbsp;the&nbsp;format&nbsp;string.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&n
 &nbsp;<br>
 Pack&nbsp;the&nbsp;values&nbsp;v1,&nbsp;v2,&nbsp;...&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string&nbsp;and&nbsp;write<br>
 the&nbsp;packed&nbsp;bytes&nbsp;into&nbsp;the&nbsp;writable&nbsp;buffer&nbsp;buf&nbsp;starting&nbsp;at&nbsp;offset.&nbsp;&nbsp;Note<br>
-that&nbsp;the&nbsp;offset&nbsp;is&nbsp;a&nbsp;required&nbsp;argument.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more<br>
-on&nbsp;format&nbsp;strings.</span></dd></dl>
+that&nbsp;the&nbsp;offset&nbsp;is&nbsp;a&nbsp;required&nbsp;argument.&nbsp;&nbsp;A&nbsp;negative&nbsp;offset&nbsp;counts&nbsp;from<br>
+the&nbsp;end&nbsp;of&nbsp;the&nbsp;buffer.&nbsp;&nbsp;See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
  <dl><dt><a name="-unpack"><strong>unpack</strong></a>(format, buffer, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;values&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string.<br>
 &nbsp;<br>
 The&nbsp;buffer's&nbsp;size&nbsp;in&nbsp;bytes&nbsp;must&nbsp;be&nbsp;<a href="#-calcsize">calcsize</a>(format).<br>
@@ -417,6 +411,7 @@ See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span
  <dl><dt><a name="-unpack_from"><strong>unpack_from</strong></a>(format, /, buffer, offset=0)</dt><dd><span class="code">Return&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;values&nbsp;unpacked&nbsp;according&nbsp;to&nbsp;the&nbsp;format&nbsp;string.<br>
 &nbsp;<br>
 The&nbsp;buffer's&nbsp;size,&nbsp;minus&nbsp;offset,&nbsp;must&nbsp;be&nbsp;at&nbsp;least&nbsp;<a href="#-calcsize">calcsize</a>(format).<br>
+A&nbsp;negative&nbsp;offset&nbsp;counts&nbsp;from&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;buffer.<br>
 &nbsp;<br>
 See&nbsp;help(struct)&nbsp;for&nbsp;more&nbsp;on&nbsp;format&nbsp;strings.</span></dd></dl>
 </td></tr></table><p>
